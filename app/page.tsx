@@ -97,7 +97,7 @@ export default function Page() {
                 </svg>
 
                 <div className="mt-4 flex items-center gap-3">
-                  <span className="mono text-[0.6rem] text-copper-300">EC13006482</span>
+                  <span className="mono text-[0.6rem] text-copper-300">RES · COMM</span>
                   <span className="mono text-[0.6rem] text-bone/40">·</span>
                   <span className="mono text-[0.6rem] text-bone/40">200A SVC</span>
                 </div>
