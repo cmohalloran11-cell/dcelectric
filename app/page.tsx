@@ -176,11 +176,7 @@ export default function Page() {
 
           <div className="md:col-span-5">
             <div data-reveal style={{ ['--reveal-delay' as any]: '300ms' }} className="photo-block aspect-[4/5]">
-              <img
-                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=700&q=80"
-                alt="Industrial wiring detail"
-                className="w-full h-full object-cover"
-              />
+              <DCWiringScene />
             </div>
           </div>
         </div>
@@ -310,6 +306,114 @@ export default function Page() {
         </div>
       </footer>
     </main>
+  );
+}
+
+/**
+ * Heritage-section illustration: tradesman's open panel with bundled wiring.
+ * Shows romex coils, conductors landing on a busbar, copper grounding strap.
+ * Reads as "this guy actually works with his hands."
+ */
+function DCWiringScene() {
+  return (
+    <svg
+      viewBox="0 0 400 500"
+      preserveAspectRatio="xMidYMid slice"
+      className="block w-full h-full"
+      role="img"
+      aria-label="An electrical panel with bundled wiring, viewed from inside"
+    >
+      <defs>
+        <linearGradient id="dc-bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%"  stopColor="#1A1A1F" />
+          <stop offset="100%" stopColor="#0E0E12" />
+        </linearGradient>
+        <linearGradient id="dc-copper" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#E89F1F" />
+          <stop offset="100%" stopColor="#9F5D2C" />
+        </linearGradient>
+      </defs>
+
+      <rect width="400" height="500" fill="url(#dc-bg)" />
+
+      {/* faint blueprint grid */}
+      <g opacity="0.12" stroke="#C97840">
+        {Array.from({ length: 9 }).map((_, i) => (
+          <line key={`v${i}`} x1={i * 50} y1="0" x2={i * 50} y2="500" strokeWidth="0.5" />
+        ))}
+        {Array.from({ length: 11 }).map((_, i) => (
+          <line key={`h${i}`} x1="0" y1={i * 50} x2="400" y2={i * 50} strokeWidth="0.5" />
+        ))}
+      </g>
+
+      {/* panel body */}
+      <rect x="40" y="40" width="320" height="420" rx="4" fill="#222228" stroke="#3A3A42" strokeWidth="1" />
+      <rect x="52" y="52" width="296" height="396" rx="2" fill="#1A1A1F" stroke="#3A3A42" strokeWidth="0.5" />
+
+      {/* mounting screws */}
+      {[
+        [56, 56], [344, 56], [56, 444], [344, 444]
+      ].map(([cx, cy], i) => (
+        <g key={i}>
+          <circle cx={cx} cy={cy} r="3.5" fill="#3A3A42" />
+          <line x1={cx - 2} y1={cy} x2={cx + 2} y2={cy} stroke="#6E6E76" strokeWidth="0.8" />
+        </g>
+      ))}
+
+      {/* busbar — vertical center */}
+      <rect x="195" y="80" width="10" height="340" fill="url(#dc-copper)" />
+      <rect x="195" y="80" width="10" height="340" fill="rgba(255,255,255,0.08)" />
+
+      {/* breaker rows — 6 left, 6 right */}
+      {Array.from({ length: 6 }).map((_, i) => {
+        const y = 100 + i * 50;
+        return (
+          <g key={i}>
+            {/* left breaker */}
+            <rect x="80" y={y} width="100" height="30" rx="3" fill="#2A2A2A" stroke="#3A3A42" />
+            <rect x="155" y={y + 8} width="20" height="14" rx="2" fill={i === 2 ? "#E89F1F" : "#6E6E76"} />
+            <text x="90" y={y + 18} fill="#6E6E76" fontSize="8" fontFamily="monospace">{20 + i * 5}A</text>
+            {/* right breaker */}
+            <rect x="220" y={y} width="100" height="30" rx="3" fill="#2A2A2A" stroke="#3A3A42" />
+            <rect x="225" y={y + 8} width="20" height="14" rx="2" fill={i === 4 ? "#E89F1F" : "#6E6E76"} />
+            <text x="260" y={y + 18} fill="#6E6E76" fontSize="8" fontFamily="monospace">{15 + i * 5}A</text>
+
+            {/* connection trace from breaker to busbar */}
+            <line x1="175" y1={y + 15} x2="195" y2={y + 15} stroke="#C97840" strokeWidth="1.5" />
+            <line x1="205" y1={y + 15} x2="225" y2={y + 15} stroke="#C97840" strokeWidth="1.5" />
+          </g>
+        );
+      })}
+
+      {/* romex cable entering top */}
+      <g>
+        {/* white romex sheath */}
+        <path d="M 95 0 Q 90 30 80 60 Q 75 75 85 85" stroke="#EDEDE8" strokeWidth="6" fill="none" strokeLinecap="round" />
+        {/* exposed conductors */}
+        <path d="M 88 76 Q 90 80 110 92" stroke="#C97840" strokeWidth="1.4" fill="none" />
+        <path d="M 86 80 Q 88 86 110 102" stroke="#FFFFFF" strokeWidth="1.4" fill="none" opacity="0.7" />
+        <path d="M 84 84 Q 86 92 110 112" stroke="#222228" strokeWidth="1.4" fill="none" />
+      </g>
+
+      <g>
+        <path d="M 305 0 Q 312 28 322 60 Q 325 75 315 85" stroke="#EDEDE8" strokeWidth="6" fill="none" strokeLinecap="round" />
+        <path d="M 314 76 Q 312 80 290 92" stroke="#C97840" strokeWidth="1.4" fill="none" />
+        <path d="M 316 80 Q 314 86 290 102" stroke="#FFFFFF" strokeWidth="1.4" fill="none" opacity="0.7" />
+        <path d="M 318 84 Q 316 92 290 112" stroke="#222228" strokeWidth="1.4" fill="none" />
+      </g>
+
+      {/* grounding strap exiting bottom */}
+      <path d="M 200 420 L 200 460 Q 200 480 210 490" stroke="url(#dc-copper)" strokeWidth="5" fill="none" />
+
+      {/* hand-written panel label sticker */}
+      <g transform="translate(80, 432)">
+        <rect width="240" height="14" rx="2" fill="#F8F8F6" />
+        <text x="6" y="10" fill="#1A1A1F" fontSize="7" fontFamily="monospace" letterSpacing="0.05em">PANEL · MAIN · 200A · HADY</text>
+      </g>
+
+      {/* subtle reflection on busbar */}
+      <line x1="198" y1="80" x2="198" y2="420" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+    </svg>
   );
 }
 
