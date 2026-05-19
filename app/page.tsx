@@ -64,15 +64,8 @@ export default function Page() {
           <div className="md:col-span-5 anim-settle" style={{ ['--anim-delay' as any]: '500ms' }}>
             {/* Schematic-style panel card */}
             <div className="border border-copper-500/40 bg-graphite-900/50 p-1">
-              <div className="border border-copper-500/20 p-6 relative">
-                <div className="flex items-center justify-between text-xs mono text-copper-300 uppercase tracking-widest">
-                  <span>Panel · 200A</span>
-                  <span className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 dot-pulse" /> Live
-                  </span>
-                </div>
-
-                <svg viewBox="0 0 280 160" className="mt-5 w-full">
+              <div className="border border-copper-500/20 p-8 relative">
+                <svg viewBox="0 0 280 160" className="w-full">
                   <defs>
                     <linearGradient id="copperGrad" x1="0" x2="1">
                       <stop offset="0%" stopColor="#9F5D2C" />
@@ -95,12 +88,6 @@ export default function Page() {
                     className="voltage-path"
                   />
                 </svg>
-
-                <div className="mt-4 flex items-center gap-3">
-                  <span className="mono text-[0.6rem] text-copper-300">RES · COMM</span>
-                  <span className="mono text-[0.6rem] text-bone/40">·</span>
-                  <span className="mono text-[0.6rem] text-bone/40">200A SVC</span>
-                </div>
               </div>
             </div>
           </div>
@@ -114,7 +101,7 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
           <div className="grid md:grid-cols-12 gap-8 items-end">
             <div className="md:col-span-7">
-              <div data-reveal className="eyebrow">[ 01 · SERVICES ]</div>
+              <div data-reveal className="eyebrow">SERVICES</div>
               <h2 data-reveal className="mt-3 font-display font-extrabold text-4xl md:text-5xl text-graphite-800 leading-tight">
                 Residential. Commercial.<br />Whatever it needs.
               </h2>
@@ -137,11 +124,10 @@ export default function Page() {
             ].map((s, i) => (
               <div key={s.t} data-reveal style={{ ['--reveal-delay' as any]: `${i * 80}ms` }}
                 className="svc-tile p-6">
-                <div className="flex items-baseline justify-between">
-                  <span className="mono text-xs text-copper-700">[ {s.n} ]</span>
+                <div className="flex justify-end">
                   <span className="w-1.5 h-1.5 rounded-full bg-copper-500" />
                 </div>
-                <div className="mt-4 font-display font-bold text-lg text-graphite-800">{s.t}</div>
+                <div className="mt-3 font-display font-bold text-lg text-graphite-800">{s.t}</div>
                 <div className="mt-2 text-graphite-500 text-sm leading-relaxed">{s.d}</div>
               </div>
             ))}
@@ -154,7 +140,7 @@ export default function Page() {
         <div className="absolute inset-0 opacity-30 blueprint" aria-hidden="true" />
         <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-7">
-            <div data-reveal className="eyebrow !text-copper-300">[ 02 · HERITAGE ]</div>
+            <div data-reveal className="eyebrow !text-copper-300">HERITAGE</div>
             <h2 data-reveal className="mt-4 font-display font-extrabold text-4xl md:text-6xl text-bone leading-tight tracking-tight">
               <span className="text-copper-300">Forty-eight years</span><br />
               in the trade.
@@ -187,7 +173,7 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
           <div className="grid md:grid-cols-12 gap-12 items-center">
             <div className="md:col-span-7">
-              <div data-reveal className="eyebrow">[ 03 · EMERGENCY ]</div>
+              <div data-reveal className="eyebrow">EMERGENCY</div>
               <h2 data-reveal className="mt-3 font-display font-extrabold text-4xl md:text-5xl text-graphite-800 leading-tight">
                 Electrical problems don&apos;t<br />
                 wait for business hours.
@@ -216,7 +202,7 @@ export default function Page() {
       {/* ── Customer voices ── */}
       <section className="bg-bone-200">
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <div data-reveal className="eyebrow">[ 04 · CUSTOMERS ]</div>
+          <div data-reveal className="eyebrow">CUSTOMERS</div>
           <h2 data-reveal className="mt-3 font-display font-extrabold text-3xl md:text-4xl text-graphite-800">
             From the folks who called.
           </h2>
@@ -228,7 +214,6 @@ export default function Page() {
             ].map((r, i) => (
               <blockquote key={r.q} data-reveal style={{ ['--reveal-delay' as any]: `${i * 120}ms` }}
                 className="svc-tile p-8">
-                <div className="mono text-xs text-copper-700">[ # {String(i + 1).padStart(2, '0')} ]</div>
                 <div className="mt-4 font-display text-2xl text-graphite-800 leading-snug">“{r.q}”</div>
                 <div className="mt-5 mono uppercase text-[0.65rem] text-graphite-500 tracking-widest">— {r.a}</div>
               </blockquote>
@@ -244,7 +229,7 @@ export default function Page() {
             { n: '48',   l: 'YEARS · TRADE'      },
             { n: 'A+',   l: 'BBB · SINCE 2014'   },
             { n: '24/7', l: 'EMERGENCY LINE'     },
-            { n: 'FAM',  l: 'OWNED · OPERATED'   },
+            { n: 'Family',  l: 'OWNED · OPERATED'   },
           ].map((s, i) => (
             <div key={s.l} data-reveal style={{ ['--reveal-delay' as any]: `${i * 90}ms` }}
               className="border-l border-copper-500/50 pl-5">
@@ -259,7 +244,7 @@ export default function Page() {
       <section id="contact" className="bg-bone">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5">
-            <div data-reveal className="eyebrow">[ 05 · CONTACT ]</div>
+            <div data-reveal className="eyebrow">CONTACT</div>
             <h2 data-reveal className="mt-3 font-display font-extrabold text-4xl md:text-5xl text-graphite-800 leading-tight">
               Get on the schedule.
             </h2>
